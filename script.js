@@ -14,34 +14,35 @@ function calculateROIValue(initial, current, cost) {
     return (netProfit / initial) * 100;
 }
 
-// --- Tab Switching Logic ---
-function openTab(evt, tabId) {
-    // Get all tab content elements and hide them
-    const tabcontents = document.getElementsByClassName("tab-content");
-    for (let i = 0; i < tabcontents.length; i++) {
-        tabcontents[i].style.display = "none";
-        tabcontents[i].classList.remove('active'); // Remove active class for animation
+// --- Page Switching Logic ---
+function openPage(evt, pageId) {
+    // Get all page sections and hide them
+    const pageSections = document.getElementsByClassName("page-section");
+    for (let i = 0; i < pageSections.length; i++) {
+        pageSections[i].style.display = "none";
+        pageSections[i].classList.remove('active'); // Remove active class for animation
     }
 
-    // Get all tab buttons and remove the "active" class
-    const tabbuttons = document.getElementsByClassName("tab-button");
-    for (let i = 0; i < tabbuttons.length; i++) {
-        tabbuttons[i].classList.remove("active");
+    // Get all nav buttons and remove the "active" class
+    const navButtons = document.getElementsByClassName("nav-button");
+    for (let i = 0; i < navButtons.length; i++) {
+        navButtons[i].classList.remove("active");
     }
 
-    // Show the current tab and add an "active" class to the button
-    document.getElementById(tabId).style.display = "block";
-    document.getElementById(tabId).classList.add('active'); // Add active class for animation
+    // Show the current page and add an "active" class to the button
+    document.getElementById(pageId).style.display = "block";
+    document.getElementById(pageId).classList.add('active'); // Add active class for animation
     evt.currentTarget.classList.add("active");
 
-    // If switching to dashboard, update the list and chart
-    if (tabId === 'dashboard') {
+    // Specific actions for certain pages
+    if (pageId === 'investment-hub') {
         displayInvestments();
         updateDashboardChart();
+        showCalculatorInputs(); // Ensure calculator inputs are shown when hub is opened
     }
 }
 
-// --- Investment Calculator Logic ---
+// --- Investment Calculator Logic (now part of Investment Hub) ---
 const calculatorInputsDiv = document.getElementById('calculator-inputs');
 const calculatorResultDiv = document.getElementById('calculator-result');
 
@@ -76,7 +77,7 @@ function showCalculatorInputs() {
                 <span class="tooltiptext">How many times interest is compounded per year (e.g., 1 for annually, 12 for monthly).</span>
             </div>
             <div class="button-group">
-                <button class="btn-calculate" onclick="calculateCompoundInterest()">Calculate Compound Interest</button>
+                <button class="btn-action" onclick="calculateCompoundInterest()"><i class="fas fa-calculator"></i> Calculate</button>
             </div>
         `;
     } else if (selectedCalc === 'roi') {
@@ -97,7 +98,7 @@ function showCalculatorInputs() {
                 <span class="tooltiptext">Any additional costs associated with the investment (e.g., fees, maintenance).</span>
             </div>
             <div class="button-group">
-                <button class="btn-calculate" onclick="calculateROI()">Calculate ROI</button>
+                <button class="btn-action" onclick="calculateROI()"><i class="fas fa-calculator"></i> Calculate</button>
             </div>
         `;
     } else if (selectedCalc === 'annuity') {
@@ -118,7 +119,7 @@ function showCalculatorInputs() {
                 <span class="tooltiptext">The total number of payment periods.</span>
             </div>
             <div class="button-group">
-                <button class="btn-calculate" onclick="calculateAnnuityFV()">Calculate Annuity FV</button>
+                <button class="btn-action" onclick="calculateAnnuityFV()"><i class="fas fa-calculator"></i> Calculate</button>
             </div>
         `;
     }
@@ -194,7 +195,7 @@ function calculateAnnuityFV() {
     }
 }
 
-// --- Investment Dashboard Logic ---
+// --- Investment Dashboard Logic (now part of Investment Hub) ---
 const investmentListUL = document.getElementById('investment-list');
 const invNameInput = document.getElementById('inv-name');
 const invTypeInput = document.getElementById('inv-type');
@@ -208,7 +209,7 @@ function displayInvestments() {
     investmentListUL.innerHTML = ''; // Clear existing list items
 
     if (investments.length === 0) {
-        investmentListUL.innerHTML = '<li class="no-investments-message">No investments added yet. Use the form to the left!</li>';
+        investmentListUL.innerHTML = '<li class="no-investments-message">No investments added yet. Use the form above!</li>';
         updateDashboardChart(); // Clear chart if no investments
         return;
     }
@@ -266,7 +267,7 @@ function selectInvestment(index) {
     invDateInput.value = inv.date_acquired;
 }
 
-function clearDashboardInputs() {
+function clearInvestmentInputs() {
     invNameInput.value = '';
     invTypeInput.value = '';
     invInitialInput.value = '';
@@ -307,7 +308,7 @@ function addInvestment() {
     };
     investments.push(newInvestment);
     displayInvestments();
-    clearDashboardInputs();
+    clearInvestmentInputs();
     alert("Investment added successfully!");
 }
 
@@ -344,7 +345,7 @@ function updateInvestment() {
         date_acquired: dateAcquired
     };
     displayInvestments();
-    clearDashboardInputs();
+    clearInvestmentInputs();
     alert("Investment updated successfully!");
 }
 
@@ -361,7 +362,7 @@ function deleteInvestment(indexToDelete) {
     if (confirm(`Are you sure you want to delete "${investments[idx].name}"? This cannot be undone.`)) {
         investments.splice(idx, 1); // Remove from array
         displayInvestments();
-        clearDashboardInputs(); // Clear form after deletion
+        clearInvestmentInputs(); // Clear form after deletion
         alert("Investment deleted successfully!");
     }
 }
@@ -376,8 +377,8 @@ function updateDashboardChart() {
     }
 
     if (investments.length === 0) {
-        // Hide canvas or display a message
-        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); // Clear canvas
+        // Clear canvas if no investments to display
+        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); 
         return;
     }
 
@@ -472,9 +473,6 @@ function updateDashboardChart() {
 
 // --- Initial Setup on Page Load ---
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize the calculator inputs on page load
-    showCalculatorInputs();
-    
-    // Initial display of investments (will be empty)
-    displayInvestments();
+    // Open the home page by default
+    document.querySelector('.nav-button.active').click(); 
 });
