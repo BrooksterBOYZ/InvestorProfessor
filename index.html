@@ -14,179 +14,261 @@
             <h1>Modern Investment Dashboard</h1>
             <p>Your Financial Journey, Visualized.</p>
         </div>
+        <nav>
+            <button class="nav-button active" onclick="openPage(event, 'home')"><i class="fas fa-home"></i> Home</button>
+            <button class="nav-button" onclick="openPage(event, 'investment-hub')"><i class="fas fa-chart-pie"></i> Investment Hub</button>
+            <button class="nav-button" onclick="openPage(event, 'advice')"><i class="fas fa-lightbulb"></i> Financial Advice</button>
+            <button class="nav-button" onclick="openPage(event, 'tools')"><i class="fas fa-tools"></i> Financial Tools</button>
+            <button class="nav-button" onclick="openPage(event, 'about')"><i class="fas fa-info-circle"></i> About Us</button>
+            <button class="nav-button" onclick="openPage(event, 'contact')"><i class="fas fa-envelope"></i> Contact Us</button>
+        </nav>
     </header>
 
-    <div class="container">
-        <div class="tabs">
-            <button class="tab-button active" onclick="openTab(event, 'calculator')">
-                <i class="fas fa-calculator"></i> Investment Calculator
-            </button>
-            <button class="tab-button" onclick="openTab(event, 'dashboard')">
-                <i class="fas fa-chart-line"></i> Investment Dashboard
-            </button>
-            <button class="tab-button" onclick="openTab(event, 'advice')">
-                <i class="fas fa-lightbulb"></i> Financial Advice
-            </button>
-            <button class="tab-button" onclick="openTab(event, 'tools')">
-                <i class="fas fa-tools"></i> Financial Tools
-            </button>
-        </div>
-
-        <div id="calculator" class="tab-content active">
-            <h2>Investment Calculator</h2>
-            <p class="section-description">Calculate compound interest, ROI, or the future value of an annuity.</p>
-            
-            <div class="form-group">
-                <label for="calc-type-select">Select Calculator:</label>
-                <select id="calc-type-select" onchange="showCalculatorInputs()">
-                    <option value="compound_interest">Compound Interest</option>
-                    <option value="roi">Return on Investment (ROI)</option>
-                    <option value="annuity">Future Value of Annuity</option>
-                </select>
-            </div>
-
-            <div id="calculator-inputs" class="card calculator-card">
-                </div>
-            
-            <div class="result" id="calculator-result">
-                Result: 
-            </div>
-        </div>
-
-        <div id="dashboard" class="tab-content">
-            <h2>Investment Dashboard</h2>
-            <p class="section-description">Manage your investments and visualize their performance. **Data is stored only for the current browser session and will be lost on refresh.**</p>
-
-            <div class="dashboard-layout">
-                <div class="dashboard-controls card">
-                    <h3>Manage Investments</h3>
-                    <div class="form-group tooltip-container">
-                        <label for="inv-name">Name:</label>
-                        <input type="text" id="inv-name" placeholder="e.g., Apple Stocks" required>
-                        <span class="tooltiptext">Unique name for your investment.</span>
-                    </div>
-                    <div class="form-group tooltip-container">
-                        <label for="inv-type">Type:</label>
-                        <input type="text" id="inv-type" placeholder="e.g., Stock, ETF, Real Estate" required>
-                        <span class="tooltiptext">Category of the investment.</span>
-                    </div>
-                    <div class="form-group tooltip-container">
-                        <label for="inv-initial">Initial Investment ($):</label>
-                        <input type="number" id="inv-initial" placeholder="e.g., 5000" min="0" required>
-                        <span class="tooltiptext">Original amount invested.</span>
-                    </div>
-                    <div class="form-group tooltip-container">
-                        <label for="inv-current">Current Value ($):</label>
-                        <input type="number" id="inv-current" placeholder="e.g., 5500" min="0" required>
-                        <span class="tooltiptext">Current market value of the investment.</span>
-                    </div>
-                    <div class="form-group tooltip-container">
-                        <label for="inv-date">Date Acquired (YYYY-MM-DD):</label>
-                        <input type="date" id="inv-date" required>
-                        <span class="tooltiptext">Date you acquired this investment.</span>
-                    </div>
-                    <div class="button-group">
-                        <button class="btn-action" onclick="addInvestment()">Add Investment</button>
-                        <button class="btn-action btn-secondary" onclick="updateInvestment()">Update Selected</button>
-                        <button class="btn-action btn-danger" onclick="deleteInvestment()">Delete Selected</button>
-                        <button class="btn-action btn-info" onclick="clearDashboardInputs()">Clear Form</button>
+    <main class="page-content">
+        <div id="home" class="page-section active">
+            <div class="hero-section">
+                <div class="hero-content">
+                    <h2>Welcome to Your Personal Financial Hub!</h2>
+                    <p>Empower your financial decisions with our intuitive tools and insightful advice.</p>
+                    <div class="hero-buttons">
+                        <button class="btn-action" onclick="openPage(event, 'investment-hub')"><i class="fas fa-chart-pie"></i> Explore the Hub</button>
+                        <button class="btn-action btn-secondary" onclick="openPage(event, 'tools')"><i class="fas fa-calculator"></i> Discover Tools</button>
                     </div>
                 </div>
+            </div>
+            <div class="features-section">
+                <div class="feature-card card">
+                    <i class="fas fa-money-bill-trend-up feature-icon"></i>
+                    <h3>Unified Investment Management</h3>
+                    <p>Track, manage, and calculate your investments all in one place.</p>
+                </div>
+                <div class="feature-card card">
+                    <i class="fas fa-calculator feature-icon"></i>
+                    <h3>Powerful Calculators</h3>
+                    <p>Access precise tools for compound interest, ROI, and annuity calculations.</p>
+                </div>
+                <div class="feature-card card">
+                    <i class="fas fa-book-open feature-icon"></i>
+                    <h3>Actionable Financial Advice</h3>
+                    <p>Gain insights and tips to navigate your financial journey with confidence.</p>
+                </div>
+                <div class="feature-card card">
+                    <i class="fas fa-toolbox feature-icon"></i>
+                    <h3>Practical Financial Tools</h3>
+                    <p>Utilize tools for retirement planning, mortgages, net worth tracking, and more.</p>
+                </div>
+            </div>
+        </div>
 
-                <div class="dashboard-display">
-                    <div class="card">
-                        <h3>Your Portfolio Overview</h3>
+        <div id="investment-hub" class="page-section">
+            <div class="container investment-hub-container">
+                <h2>Your Investment Hub</h2>
+                <p class="section-description">Manage your portfolio and run financial calculations seamlessly.
+                    **Remember: all data is for the current session only.**</p>
+
+                <div class="hub-layout">
+                    <div class="dashboard-section card">
+                        <h3><i class="fas fa-clipboard-list"></i> Portfolio Management</h3>
+                        <div class="form-group tooltip-container">
+                            <label for="inv-name">Investment Name:</label>
+                            <input type="text" id="inv-name" placeholder="e.g., Tesla Stock" required>
+                            <span class="tooltiptext">A unique name for your investment.</span>
+                        </div>
+                        <div class="form-group tooltip-container">
+                            <label for="inv-type">Type of Asset:</label>
+                            <input type="text" id="inv-type" placeholder="e.g., Stock, ETF, Mutual Fund" required>
+                            <span class="tooltiptext">Categorize your investment (e.g., Stock, Bond, Real Estate).</span>
+                        </div>
+                        <div class="form-group tooltip-container">
+                            <label for="inv-initial">Initial Investment ($):</label>
+                            <input type="number" id="inv-initial" placeholder="e.g., 5000" min="0" required>
+                            <span class="tooltiptext">The original amount you invested.</span>
+                        </div>
+                        <div class="form-group tooltip-container">
+                            <label for="inv-current">Current Value ($):</label>
+                            <input type="number" id="inv-current" placeholder="e.g., 5500" min="0" required>
+                            <span class="tooltiptext">The current market value of your investment.</span>
+                        </div>
+                        <div class="form-group tooltip-container">
+                            <label for="inv-date">Date Acquired:</label>
+                            <input type="date" id="inv-date" required>
+                            <span class="tooltiptext">The date you acquired this investment.</span>
+                        </div>
+                        <div class="button-group">
+                            <button class="btn-action" onclick="addInvestment()">Add Investment</button>
+                            <button class="btn-action btn-secondary" onclick="updateInvestment()">Update Selected</button>
+                            <button class="btn-action btn-danger" onclick="deleteInvestment()">Delete Selected</button>
+                            <button class="btn-action btn-info" onclick="clearInvestmentInputs()">Clear Form</button>
+                        </div>
+
+                        <h3 class="mt-4"><i class="fas fa-list"></i> Your Current Portfolio</h3>
                         <div class="investment-list-container">
                             <ul id="investment-list">
-                                <li class="no-investments-message">No investments added yet. Use the form to the left!</li>
+                                <li class="no-investments-message">No investments added yet. Use the form above!</li>
                             </ul>
                         </div>
                     </div>
-                    <div class="plot-area card">
-                        <h4>Performance Comparison</h4>
+
+                    <div class="calculators-section card">
+                        <h3><i class="fas fa-calculator"></i> Financial Calculators</h3>
+                        <div class="form-group">
+                            <label for="calc-type-select">Select Calculator:</label>
+                            <select id="calc-type-select" onchange="showCalculatorInputs()">
+                                <option value="compound_interest">Compound Interest</option>
+                                <option value="roi">Return on Investment (ROI)</option>
+                                <option value="annuity">Future Value of Annuity</option>
+                            </select>
+                        </div>
+                        <div id="calculator-inputs" class="calculator-inputs-card">
+                            </div>
+                        <div class="result" id="calculator-result">Result:</div>
+                    </div>
+
+                    <div class="charting-section card">
+                        <h3><i class="fas fa-chart-column"></i> Portfolio Performance Overview</h3>
                         <canvas id="investmentChart"></canvas>
-                        <p class="section-description disclaimer">This chart dynamically compares initial vs. current values. For historical tracking or more complex analytics, persistent data storage (backend) is required.</p>
+                        <p class="section-description disclaimer">This chart visualizes initial vs. current values of your investments for the current session.</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div id="advice" class="tab-content">
-            <h2>Financial Advice Center 💡</h2>
-            <p class="section-description">Key principles and tips for effective personal finance and investment.</p>
-            <div class="advice-section card">
-                <h3>Building a Solid Financial Foundation</h3>
-                <ul>
-                    <li><strong>Budgeting & Tracking:</strong> Know where your money goes. Use tools or spreadsheets to track income and expenses.</li>
-                    <li><strong>Emergency Fund:</strong> Aim for 3-6 months of living expenses in an easily accessible, high-yield savings account.</li>
-                    <li><strong>Debt Management:</strong> Prioritize paying off high-interest debt. Consider methods like the debt snowball or avalanche.</li>
-                </ul>
+        <div id="advice" class="page-section">
+            <div class="container">
+                <h2>Financial Advice Center 💡</h2>
+                <p class="section-description">Key principles and tips for effective personal finance and investment.</p>
+                <div class="advice-section card">
+                    <h3>Building a Solid Financial Foundation</h3>
+                    <ul>
+                        <li><strong>Budgeting & Tracking:</strong> Know where your money goes. Use tools or spreadsheets to track income and expenses.</li>
+                        <li><strong>Emergency Fund:</strong> Aim for 3-6 months of living expenses in an easily accessible, high-yield savings account.</li>
+                        <li><strong>Debt Management:</strong> Prioritize paying off high-interest debt. Consider methods like the debt snowball or avalanche.</li>
+                    </ul>
 
-                <h3>Smart Investing Strategies</h3>
-                <ul>
-                    <li><strong>Start Early & Consistently:</strong> The power of compound interest is immense. Even small, regular contributions can grow significantly over time.</li>
-                    <li><strong>Diversify Your Portfolio:</strong> Spread your investments across various asset classes (stocks, bonds, real estate), industries, and geographies to mitigate risk.</li>
-                    <li><strong>Understand Your Risk Tolerance:</strong> Align your investments with your comfort level for risk. Younger investors might tolerate more risk for higher potential returns.</li>
-                    <li><strong>Long-Term Perspective:</strong> Markets fluctuate. Focus on long-term goals and avoid emotional decisions based on short-term movements.</li>
-                    <li><strong>Keep Fees Low:</strong> High fees can eat into your returns. Opt for low-cost index funds or ETFs where appropriate.</li>
-                </ul>
+                    <h3>Smart Investing Strategies</h3>
+                    <ul>
+                        <li><strong>Start Early & Consistently:</strong> The power of compound interest is immense. Even small, regular contributions can grow significantly over time.</li>
+                        <li><strong>Diversify Your Portfolio:</strong> Spread your investments across various asset classes (stocks, bonds, real estate), industries, and geographies to mitigate risk.</li>
+                        <li><strong>Understand Your Risk Tolerance:</strong> Align your investments with your comfort level for risk. Younger investors might tolerate more risk for higher potential returns.</li>
+                        <li><strong>Long-Term Perspective:</strong> Markets fluctuate. Focus on long-term goals and avoid emotional decisions based on short-term movements.</li>
+                        <li><strong>Keep Fees Low:</strong> High fees can eat into your returns. Opt for low-cost index funds or ETFs where appropriate.</li>
+                    </ul>
 
-                <h3>Continuous Learning & Professional Guidance</h3>
-                <ul>
-                    <li><strong>Educate Yourself:</strong> Continuously learn about personal finance and investing. Resources abound online and in libraries.</li>
-                    <li><strong>Set Clear Goals:</strong> Define specific, measurable, achievable, relevant, and time-bound (SMART) financial goals.</li>
-                    <li><strong>Review & Adjust:</strong> Periodically review your financial plan, investments, and goals, and make adjustments as life circumstances change.</li>
-                    <li><strong>Consult Professionals:</strong> For complex situations, tax planning, or estate planning, consider consulting a certified financial planner.</li>
-                </ul>
+                    <h3>Continuous Learning & Professional Guidance</h3>
+                    <ul>
+                        <li><strong>Educate Yourself:</strong> Continuously learn about personal finance and investing. Resources abound online and in libraries.</li>
+                        <li><strong>Set Clear Goals:</strong> Define specific, measurable, achievable, relevant, and time-bound (SMART) financial goals.</li>
+                        <li><strong>Review & Adjust:</strong> Periodically review your financial plan, investments, and goals, and make adjustments as life circumstances change.</li>
+                        <li><strong>Consult Professionals:</strong> For complex situations, tax planning, or estate planning, consider consulting a certified financial planner.</li>
+                    </ul>
 
-                <div class="disclaimer">
-                    <strong>Disclaimer:</strong> This information is for educational purposes only and not financial advice. Consult a professional for personalized guidance.
+                    <div class="disclaimer">
+                        <strong>Disclaimer:</strong> This information is for educational purposes only and not financial advice. Consult a professional for personalized guidance.
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div id="tools" class="tab-content">
-            <h2>Financial Tools & Resources 🛠️</h2>
-            <p class="section-description">Interactive tools and helpful resources to aid your financial planning.</p>
-            <div class="tools-section tool-grid">
-                <div class="tool-card card">
-                    <h3><i class="fas fa-chart-pie"></i> Retirement Planner</h3>
-                    <p>Estimate how much you need to save for retirement and project your future income.</p>
-                    <button class="btn-action btn-sm" onclick="alert('Retirement Planner: This tool would calculate required savings, project portfolio growth, and show potential retirement income. Requires complex financial modeling and input fields for age, desired income, inflation, etc.')">Launch Tool</button>
-                </div>
+        <div id="tools" class="page-section">
+            <div class="container">
+                <h2>Financial Tools & Resources 🛠️</h2>
+                <p class="section-description">Interactive tools and helpful resources to aid your financial planning.</p>
+                <div class="tools-section tool-grid">
+                    <div class="tool-card card">
+                        <h3><i class="fas fa-chart-pie"></i> Retirement Planner</h3>
+                        <p>Estimate how much you need to save for retirement and project your future income.</p>
+                        <button class="btn-action btn-sm" onclick="alert('Retirement Planner: This tool would calculate required savings, project portfolio growth, and show potential retirement income. Requires complex financial modeling and input fields for age, desired income, inflation, etc.')">Launch Tool</button>
+                    </div>
 
-                <div class="tool-card card">
-                    <h3><i class="fas fa-home"></i> Mortgage Calculator</h3>
-                    <p>Calculate your monthly mortgage payments, total interest paid, and amortization schedule.</p>
-                    <button class="btn-action btn-sm" onclick="alert('Mortgage Calculator: Input loan amount, interest rate, and term to see monthly payments and amortization. Could show principal vs. interest over time.')">Launch Tool</button>
-                </div>
+                    <div class="tool-card card">
+                        <h3><i class="fas fa-home"></i> Mortgage Calculator</h3>
+                        <p>Calculate your monthly mortgage payments, total interest paid, and amortization schedule.</p>
+                        <button class="btn-action btn-sm" onclick="alert('Mortgage Calculator: Input loan amount, interest rate, and term to see monthly payments and amortization. Could show principal vs. interest over time.')">Launch Tool</button>
+                    </div>
 
-                <div class="tool-card card">
-                    <h3><i class="fas fa-car"></i> Loan Calculator</h3>
-                    <p>Determine payments and interest for various types of loans (e.g., personal, auto).</p>
-                    <button class="btn-action btn-sm" onclick="alert('Loan Calculator: Similar to mortgage, but for general loans. Input principal, rate, term to get payments and total cost.')">Launch Tool</button>
-                </div>
+                    <div class="tool-card card">
+                        <h3><i class="fas fa-car"></i> Loan Calculator</h3>
+                        <p>Determine payments and interest for various types of loans (e.g., personal, auto).</p>
+                        <button class="btn-action btn-sm" onclick="alert('Loan Calculator: Similar to mortgage, but for general loans. Input principal, rate, term to get payments and total cost.')">Launch Tool</button>
+                    </div>
 
-                <div class="tool-card card">
-                    <h3><i class="fas fa-wallet"></i> Net Worth Tracker</h3>
-                    <p>A simple tool to input your assets and liabilities to track your net worth over time.</p>
-                    <button class="btn-action btn-sm" onclick="alert('Net Worth Tracker: Input assets (cash, investments, property) and liabilities (loans, credit cards) to calculate net worth. Could track changes over time with data storage.')">Launch Tool</button>
-                </div>
+                    <div class="tool-card card">
+                        <h3><i class="fas fa-wallet"></i> Net Worth Tracker</h3>
+                        <p>A simple tool to input your assets and liabilities to track your net worth over time.</p>
+                        <button class="btn-action btn-sm" onclick="alert('Net Worth Tracker: Input assets (cash, investments, property) and liabilities (loans, credit cards) to calculate net worth. Could track changes over time with data storage.')">Launch Tool</button>
+                    </div>
 
-                <div class="tool-card card">
-                    <h3><i class="fas fa-money-bill-wave"></i> Inflation Calculator</h3>
-                    <p>See how inflation impacts the purchasing power of your money over time.</p>
-                    <button class="btn-action btn-sm" onclick="alert('Inflation Calculator: Input a starting amount, inflation rate, and years to see its future purchasing power.')">Launch Tool</button>
-                </div>
+                    <div class="tool-card card">
+                        <h3><i class="fas fa-money-bill-wave"></i> Inflation Calculator</h3>
+                        <p>See how inflation impacts the purchasing power of your money over time.</p>
+                        <button class="btn-action btn-sm" onclick="alert('Inflation Calculator: Input a starting amount, inflation rate, and years to see its future purchasing power.')">Launch Tool</button>
+                    </div>
 
-                <div class="tool-card card">
-                    <h3><i class="fas fa-chart-bar"></i> Budget Planner</h3>
-                    <p>A tool to help you categorize income and expenses, and visualize your spending.</p>
-                    <button class="btn-action btn-sm" onclick="alert('Budget Planner: Input income and various expense categories to see your budget breakdown and track spending against limits.')">Launch Tool</button>
+                    <div class="tool-card card">
+                        <h3><i class="fas fa-chart-bar"></i> Budget Planner</h3>
+                        <p>A tool to help you categorize income and expenses, and visualize your spending.</p>
+                        <button class="btn-action btn-sm" onclick="alert('Budget Planner: Input income and various expense categories to see your budget breakdown and track spending against limits.')">Launch Tool</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+
+        <div id="about" class="page-section">
+            <div class="container about-container card">
+                <h2>About Us <i class="fas fa-info-circle"></i></h2>
+                <p class="section-description">Learn about our mission and vision for empowering your financial journey.</p>
+                <div class="about-content">
+                    <p>Welcome to the **Modern Investment Dashboard**! We believe that understanding and managing your finances shouldn't be complicated. Our mission is to provide an intuitive, accessible, and powerful tool to help you track your investments, calculate potential returns, and gain valuable financial insights.</p>
+                    <p>This application is designed to offer a seamless, client-side experience. It's a demonstration of how a rich user interface and interactive financial tools can be built purely with **HTML, CSS, and JavaScript**, without the need for a backend server or database for data storage.</p>
+                    <p>While this means your data for investments is temporary (it won't save after you close or refresh the browser), it serves as an excellent foundation for personal financial exploration and calculation. We're committed to providing clear, actionable information to help you make informed financial decisions.</p>
+                    <h3>Our Vision</h3>
+                    <p>To demystify personal finance and make robust financial tools available to everyone, fostering financial literacy and empowerment.</p>
+                    <h3>Disclaimer</h3>
+                    <p class="disclaimer">This application is for educational and demonstrative purposes only. It does not provide real financial advice, real-time market data, or persistent data storage. Always consult with a qualified financial professional for personalized advice.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="contact" class="page-section">
+            <div class="container contact-container card">
+                <h2>Contact Us <i class="fas fa-envelope"></i></h2>
+                <p class="section-description">We'd love to hear from you! Reach out with any questions or feedback.</p>
+                <div class="contact-content">
+                    <p>While this is a client-side demonstration, you can imagine reaching out to us through the following channels:</p>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> Address: 123 Financial Freedom Lane, Leander, TX 78641, USA</li>
+                        <li><i class="fas fa-phone"></i> Phone: +1 (512) 555-1234</li>
+                        <li><i class="fas fa-envelope"></i> Email: info@investmentdashboard.com</li>
+                        <li><i class="fas fa-globe"></i> Website: www.investmentdashboard.com (conceptual)</li>
+                    </ul>
+                    <p>You can also send us a message using the form below (note: this form is purely illustrative and does not send actual emails without a backend):</p>
+                    <form class="contact-form" onsubmit="alert('Thank you for your message! (Note: This form does not actually send emails in this client-side demo.)'); return false;">
+                        <div class="form-group">
+                            <label for="contact-name">Your Name:</label>
+                            <input type="text" id="contact-name" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-email">Your Email:</label>
+                            <input type="email" id="contact-email" placeholder="john.doe@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-subject">Subject:</label>
+                            <input type="text" id="contact-subject" placeholder="Question about the dashboard" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-message">Message:</label>
+                            <textarea id="contact-message" rows="5" placeholder="Your message here..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn-action"><i class="fas fa-paper-plane"></i> Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Modern Investment Dashboard. All rights reserved. For demonstration purposes only. Data is not persistent.</p>
+    </footer>
 
     <script src="script.js"></script>
 </body>
