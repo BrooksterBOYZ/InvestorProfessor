@@ -4,33 +4,40 @@
     --secondary-color: #2ecc71; /* A friendly green */
     --accent-color: #f39c12; /* An energetic orange */
     --text-color: #333;
+    --light-text-color: #555;
     --background-light: #f4f7f6;
     --background-card: #ffffff;
     --border-color: #e0e0e0;
     --shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     --border-radius: 8px;
+    --padding-base: 25px;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
     background-color: var(--background-light);
     color: var(--text-color);
     line-height: 1.6;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
 }
 
+/* Header and Navigation */
 header {
-    background: linear-gradient to right, var(--primary-color), #2980b9);
+    background: linear-gradient(to right, var(--primary-color), #2980b9);
     color: white;
-    padding: 30px 0;
+    padding: 30px 0 10px; /* Adjust padding for nav */
     text-align: center;
     box-shadow: var(--shadow);
     position: relative;
     overflow: hidden;
+    flex-shrink: 0; /* Prevents header from shrinking */
 }
 
 .header-content h1 {
@@ -44,25 +51,83 @@ header {
     font-size: 1.1em;
     opacity: 0.9;
     margin-top: 5px;
+    margin-bottom: 20px;
 }
 
-.container {
-    max-width: 1400px;
-    margin: 20px auto;
-    padding: 25px;
-    background-color: var(--background-card);
+nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Allow nav items to wrap */
+    gap: 10px; /* Space between nav buttons */
+    padding-bottom: 15px;
+}
+
+.nav-button {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: white;
+    padding: 12px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-    flex-grow: 1; /* Allows container to grow and push footer down */
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-shadow: 0 0 1px rgba(0,0,0,0.1);
+}
+
+.nav-button:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.nav-button.active {
+    background-color: white;
+    color: var(--primary-color);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    transform: translateY(-1px);
+}
+
+.nav-button.active i {
+    color: var(--primary-color);
+}
+
+
+/* Main Content Area */
+.page-content {
+    flex-grow: 1; /* Allows main content to take remaining space */
+    padding: 20px 0;
+    display: flex; /* Use flex to manage page sections */
+    flex-direction: column;
+    align-items: center;
+}
+
+.page-section {
+    display: none; /* Hidden by default */
+    width: 100%; /* Take full width of its parent */
+    padding-bottom: 40px; /* Space above footer */
+}
+
+.page-section.active {
+    display: block; /* Show active content */
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 h2 {
-    font-size: 2.2em;
+    font-size: 2.5em;
     color: var(--primary-color);
     text-align: center;
     margin-bottom: 25px;
-    position: relative;
     padding-bottom: 10px;
+    position: relative;
 }
 
 h2::after {
@@ -71,102 +136,49 @@ h2::after {
     left: 50%;
     bottom: 0;
     transform: translateX(-50%);
-    width: 60px;
-    height: 3px;
+    width: 80px;
+    height: 4px;
     background-color: var(--secondary-color);
     border-radius: 2px;
 }
 
 h3 {
-    font-size: 1.5em;
+    font-size: 1.6em;
     color: var(--text-color);
     margin-bottom: 15px;
     border-bottom: 1px solid var(--border-color);
     padding-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .section-description {
     text-align: center;
     margin-bottom: 30px;
-    color: #666;
-    font-size: 1.05em;
-    max-width: 800px;
+    color: var(--light-text-color);
+    font-size: 1.1em;
+    max-width: 900px;
     margin-left: auto;
     margin-right: auto;
 }
 
-/* Cards for content sections */
+/* Containers & Cards */
+.container {
+    max-width: 1400px;
+    margin: 20px auto;
+    padding: var(--padding-base);
+    background-color: var(--background-card);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
 .card {
     background-color: var(--background-card);
     border-radius: var(--border-radius);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    padding: 25px;
-    margin-bottom: 20px;
-}
-
-/* Navigation Tabs */
-.tabs {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 30px;
-    border-bottom: 2px solid #ddd;
-    background-color: #f9f9f9;
-    border-radius: var(--border-radius);
-    overflow: hidden;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-
-.tab-button {
-    flex: 1; /* Distribute space evenly */
-    background-color: #e9ecef;
-    color: var(--text-color);
-    padding: 15px 20px;
-    cursor: pointer;
-    border: none;
-    border-right: 1px solid #dee2e6;
-    font-size: 1.1em;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    text-shadow: 0 0 1px rgba(0,0,0,0.1);
-}
-
-.tab-button:last-child {
-    border-right: none;
-}
-
-.tab-button:hover {
-    background-color: #dbe2e7;
-    color: var(--primary-color);
-}
-
-.tab-button.active {
-    background-color: var(--primary-color);
-    color: white;
-    font-weight: bold;
-    border-bottom: 3px solid var(--secondary-color);
-    box-shadow: inset 0 -3px 0 var(--secondary-color), 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.tab-button i {
-    font-size: 1.2em;
-}
-
-.tab-content {
-    display: none; /* Hidden by default */
-    padding: 20px 0;
-}
-
-.tab-content.active {
-    display: block; /* Show active content */
-    animation: fadeIn 0.5s ease-out;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    padding: var(--padding-base);
+    margin-bottom: 20px; /* For sections that are themselves cards */
 }
 
 /* Form Styling */
@@ -178,13 +190,15 @@ h3 {
     display: block;
     margin-bottom: 8px;
     font-weight: bold;
-    color: #555;
+    color: var(--light-text-color);
     font-size: 1.05em;
 }
 
 .form-group input[type="number"],
 .form-group input[type="text"],
 .form-group input[type="date"],
+.form-group input[type="email"],
+.form-group textarea,
 .form-group select {
     width: 100%;
     padding: 12px 15px;
@@ -197,10 +211,15 @@ h3 {
 }
 
 .form-group input:focus,
-.form-group select:focus {
+.form-group select:focus,
+.form-group textarea:focus {
     border-color: var(--primary-color);
     box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
     outline: none;
+}
+
+textarea {
+    resize: vertical; /* Allow vertical resizing of textareas */
 }
 
 /* Buttons */
@@ -212,7 +231,7 @@ h3 {
     justify-content: flex-start;
 }
 
-.btn-action, .btn-calculate {
+.btn-action {
     background-color: var(--primary-color);
     color: white;
     padding: 12px 25px;
@@ -224,15 +243,18 @@ h3 {
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     white-space: nowrap; /* Prevent button text from wrapping */
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
 }
 
-.btn-action:hover, .btn-calculate:hover {
+.btn-action:hover {
     background-color: #2980b9;
     transform: translateY(-2px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
-.btn-action:active, .btn-calculate:active {
+.btn-action:active {
     transform: translateY(0);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
@@ -263,7 +285,6 @@ h3 {
     font-size: 0.9em;
 }
 
-
 .result {
     font-size: 1.3em;
     font-weight: bold;
@@ -277,31 +298,140 @@ h3 {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-/* Calculator Specifics */
-.calculator-card {
-    padding: 25px 35px;
-}
-
-/* Dashboard Specifics */
-.dashboard-layout {
-    display: flex;
-    gap: 25px;
-    flex-wrap: wrap; /* Allows columns to stack on smaller screens */
-}
-
-.dashboard-controls {
-    flex: 1 1 350px; /* Allows it to grow, but has a base width */
-}
-
-.dashboard-display {
-    flex: 2 1 600px; /* Allows it to grow, but has a larger base width */
+/* Home Page Specifics */
+.hero-section {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #2980b9 100%);
+    color: white;
+    padding: 80px 20px;
+    text-align: center;
+    border-radius: var(--border-radius);
+    margin: 20px auto;
+    max-width: 1400px;
+    box-shadow: var(--shadow);
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+}
+.hero-content h2 {
+    color: white;
+    font-size: 3.5em;
+    margin-bottom: 15px;
+}
+.hero-content h2::after {
+    background-color: var(--accent-color);
+}
+.hero-content p {
+    font-size: 1.4em;
+    margin-bottom: 40px;
+    max-width: 800px;
+    opacity: 0.9;
+}
+.hero-buttons .btn-action {
+    background-color: var(--accent-color);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    font-size: 1.1em;
+    padding: 15px 30px;
+}
+.hero-buttons .btn-action:hover {
+    background-color: #d88700;
+}
+.hero-buttons .btn-secondary { /* Using secondary for the second button in hero */
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+.hero-buttons .btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.3);
 }
 
+.features-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 50px;
+    padding: 0 20px;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.feature-card {
+    text-align: center;
+    padding: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+.feature-card .feature-icon {
+    font-size: 3.5em;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+.feature-card h3 {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+    color: var(--secondary-color);
+    border-bottom: none;
+    padding-bottom: 0;
+    justify-content: center;
+}
+.feature-card p {
+    color: var(--light-text-color);
+}
+
+/* Investment Hub Layout */
+.investment-hub-container {
+    padding-top: 40px;
+}
+
+.hub-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns for portfolio and calculators */
+    grid-template-rows: auto auto; /* Two rows: first for controls/list, second for chart */
+    gap: 30px;
+}
+
+.dashboard-section {
+    grid-column: 1 / 2; /* Occupy first column */
+    grid-row: 1 / 2; /* Occupy first row */
+}
+
+.calculators-section {
+    grid-column: 2 / 3; /* Occupy second column */
+    grid-row: 1 / 2; /* Occupy first row */
+}
+
+.charting-section {
+    grid-column: 1 / 3; /* Span both columns for the chart */
+    grid-row: 2 / 3; /* Occupy second row */
+    min-height: 450px; /* Ensure chart has enough height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+.charting-section h3 {
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.charting-section canvas {
+    max-width: 100%;
+    height: 350px !important; /* Fixed height for consistency */
+}
+.charting-section .disclaimer {
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: #888;
+}
+
+
 .investment-list-container {
-    max-height: 400px; /* Limit height for scrollability */
+    max-height: 350px; /* Limit height for scrollability */
     overflow-y: auto;
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
@@ -325,6 +455,7 @@ h3 {
     align-items: center;
     transition: background-color 0.2s ease, transform 0.1s ease;
     border-left: 4px solid var(--primary-color);
+    cursor: pointer;
 }
 
 #investment-list li:hover {
@@ -353,8 +484,10 @@ h3 {
 
 #investment-list li .item-details span {
     font-size: 0.9em;
-    color: #666;
+    color: var(--light-text-color);
 }
+.text-green { color: var(--secondary-color); }
+.text-red { color: #e74c3c; }
 
 
 #investment-list li .actions button {
@@ -367,6 +500,7 @@ h3 {
     cursor: pointer;
     font-size: 0.85em;
     transition: background-color 0.2s;
+    line-height: 1; /* Adjust button text vertical alignment */
 }
 #investment-list li .actions button.delete-btn {
     background-color: #dc3545; /* Red for delete */
@@ -384,53 +518,24 @@ h3 {
     border-radius: var(--border-radius);
 }
 
-.plot-area {
-    min-height: 350px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: #888;
-    font-style: italic;
-    background-color: #fcfcfc;
-}
-.plot-area canvas {
-    max-width: 100%;
-    height: auto;
-    margin-top: 20px;
-}
-.plot-area h4 {
-    margin-bottom: 10px;
-    font-size: 1.3em;
-    color: var(--primary-color);
-    border-bottom: none;
-    padding-bottom: 0;
-}
-.plot-area .section-description {
-    font-size: 0.9em;
-    margin-bottom: 15px;
-}
-
-/* Financial Advice/Tools Sections */
-.advice-section ul, .tools-section ul {
-    list-style: none; /* Remove default bullet points */
+/* Advice Section */
+.advice-section ul {
+    list-style: none;
     padding-left: 0;
     margin-bottom: 25px;
 }
-
-.advice-section li, .tools-section li {
+.advice-section li {
     background-color: #f9f9f9;
-    padding: 12px 15px;
+    padding: 15px;
     margin-bottom: 10px;
     border-left: 5px solid var(--secondary-color);
     border-radius: 5px;
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.03);
     transition: transform 0.2s;
 }
-.advice-section li:hover, .tools-section li:hover {
+.advice-section li:hover {
     transform: translateX(5px);
 }
-
 .advice-section strong {
     color: var(--primary-color);
     font-size: 1.05em;
@@ -449,13 +554,13 @@ h3 {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
+/* Tools Section */
 .tool-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 25px;
     margin-top: 30px;
 }
-
 .tool-card {
     text-align: center;
     padding: 30px 20px;
@@ -465,12 +570,10 @@ h3 {
     align-items: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
 .tool-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
-
 .tool-card h3 {
     color: var(--accent-color);
     font-size: 1.6em;
@@ -480,6 +583,7 @@ h3 {
     gap: 10px;
     border-bottom: none;
     padding-bottom: 0;
+    justify-content: center;
 }
 .tool-card h3 i {
     font-size: 1.5em;
@@ -487,65 +591,99 @@ h3 {
 }
 .tool-card p {
     font-size: 1em;
-    color: #666;
+    color: var(--light-text-color);
     margin-bottom: 25px;
     flex-grow: 1; /* Allows paragraph to take available space */
 }
 
-/* Tooltips */
-.tooltip-container {
-    position: relative;
-    display: block; /* Make it block level to wrap label and input */
+/* About Us / Contact Us */
+.about-container, .contact-container {
+    padding: 40px;
 }
-
-.tooltip-container .tooltiptext {
-    visibility: hidden;
-    width: 220px;
-    background-color: #555;
-    color: #fff;
+.about-content p, .contact-content p {
+    margin-bottom: 15px;
+    line-height: 1.7;
+    font-size: 1.05em;
+}
+.contact-info {
+    list-style: none;
+    padding: 0;
+    margin-top: 25px;
+    margin-bottom: 30px;
+}
+.contact-info li {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    color: var(--light-text-color);
+}
+.contact-info li i {
+    color: var(--primary-color);
+    font-size: 1.3em;
+    width: 25px; /* Fixed width for icon alignment */
     text-align: center;
-    border-radius: 6px;
-    padding: 8px 10px;
-    position: absolute;
-    z-index: 1000; /* Ensure it's on top */
-    bottom: calc(100% + 10px); /* Position above the input field */
-    left: 50%;
-    transform: translateX(-50%);
-    opacity: 0;
-    transition: opacity 0.3s, bottom 0.3s;
-    font-size: 0.85em;
-    white-space: normal; /* Allow text to wrap */
 }
 
-.tooltip-container .tooltiptext::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #555 transparent transparent transparent;
+.contact-form .form-group label {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
+.contact-form textarea {
+    min-height: 120px;
+}
+.contact-form .btn-action {
+    margin-top: 20px;
+    width: auto;
+    padding: 12px 30px;
 }
 
-.form-group:hover .tooltiptext,
-.tooltip-container:focus-within .tooltiptext { /* Show tooltip on focus for accessibility */
-    visibility: visible;
-    opacity: 1;
-    bottom: calc(100% + 5px); /* Slightly move up on hover/focus */
+/* Footer */
+footer {
+    background-color: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 20px 10px;
+    font-size: 0.9em;
+    margin-top: auto; /* Pushes footer to the bottom */
+    flex-shrink: 0; /* Prevents footer from shrinking */
 }
-
 
 /* Responsive Design */
+@media (max-width: 1200px) {
+    .container {
+        max-width: 96%;
+    }
+    .hub-layout {
+        grid-template-columns: 1fr; /* Stack columns on smaller wide screens */
+        grid-template-rows: auto auto auto; /* Adjust rows */
+    }
+    .dashboard-section, .calculators-section, .charting-section {
+        grid-column: 1 / 2; /* All span full width */
+        grid-row: auto; /* Auto allocate rows */
+    }
+    .charting-section {
+        min-height: 400px;
+    }
+}
+
 @media (max-width: 992px) {
-    .dashboard-layout {
-        flex-direction: column;
+    .nav-button {
+        font-size: 0.95em;
+        padding: 10px 15px;
     }
-    .dashboard-controls, .dashboard-display {
-        flex: 1 1 100%; /* Take full width */
+    h2 {
+        font-size: 2em;
     }
-    .plot-area {
-        min-height: 300px;
+    .hero-content h2 {
+        font-size: 2.8em;
+    }
+    .hero-content p {
+        font-size: 1.2em;
+    }
+    .feature-card h3 {
+        font-size: 1.5em;
     }
     .tool-grid {
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -553,16 +691,25 @@ h3 {
 }
 
 @media (max-width: 768px) {
-    .tabs {
+    header {
+        padding: 20px 0 10px;
+    }
+    nav {
         flex-direction: column;
+        gap: 8px;
+        padding: 0 10px 15px;
     }
-    .tab-button {
+    .nav-button {
+        width: 100%;
         border-right: none;
-        border-bottom: 1px solid #dee2e6;
-        padding: 12px 15px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     }
-    .tab-button.active {
-        border-bottom: 3px solid var(--secondary-color);
+    .nav-button:last-child {
+        border-bottom: none;
+    }
+    .nav-button.active {
+        border-bottom: 2px solid var(--accent-color);
+        box-shadow: inset 0 -2px 0 var(--accent-color), 0 2px 5px rgba(0, 0, 0, 0.1);
     }
     h1 {
         font-size: 2.2em;
@@ -570,33 +717,64 @@ h3 {
     h2 {
         font-size: 1.8em;
     }
-    .container {
-        padding: 15px;
-        margin: 15px auto;
+    .hero-section {
+        padding: 60px 15px;
+        min-height: 300px;
+    }
+    .hero-content h2 {
+        font-size: 2.2em;
+    }
+    .hero-content p {
+        font-size: 1em;
+        margin-bottom: 30px;
+    }
+    .btn-action {
+        width: 100%;
+        font-size: 1em;
+        padding: 10px 20px;
     }
     .button-group {
         flex-direction: column;
         gap: 8px;
     }
-    .btn-action, .btn-calculate {
-        width: 100%;
+    .container {
+        padding: 15px;
+        margin: 15px auto;
+    }
+    .charting-section canvas {
+        height: 280px !important;
+    }
+    .about-container, .contact-container {
+        padding: 25px;
     }
 }
 
-@media (max-width: 576px) {
-    .header-content h1 {
+@media (max-width: 480px) {
+    h1 {
         font-size: 1.8em;
-    }
-    .header-content p {
-        font-size: 0.9em;
     }
     h2 {
         font-size: 1.6em;
     }
-    .tab-button {
-        font-size: 1em;
+    .hero-content h2 {
+        font-size: 1.8em;
+    }
+    .hero-content p {
+        font-size: 0.9em;
+    }
+    .feature-card h3 {
+        font-size: 1.3em;
+    }
+    .feature-card .feature-icon {
+        font-size: 3em;
     }
     .tool-grid {
-        grid-template-columns: 1fr; /* Single column on very small screens */
+        grid-template-columns: 1fr;
+    }
+    .tooltip-container .tooltiptext {
+        width: 180px;
+        margin-left: -90px;
+        font-size: 0.8em;
+        padding: 6px 8px;
     }
 }
