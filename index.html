@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Investment Dashboard (Web)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Modern Investment Dashboard</h1>
+    </header>
+
+    <div class="container">
+        <div class="tabs">
+            <button class="tab-button active" onclick="openTab(event, 'calculator')">Investment Calculator 📈</button>
+            <button class="tab-button" onclick="openTab(event, 'dashboard')">Investment Dashboard 📊</button>
+            <button class="tab-button" onclick="openTab(event, 'advice')">Financial Advice 💡</button>
+            <button class="tab-button" onclick="openTab(event, 'tools')">Financial Tools 🛠️</button>
+        </div>
+
+        <div id="calculator" class="tab-content active">
+            <h2>Investment Calculator</h2>
+            
+            <div class="form-group">
+                <label for="calc-type-select">Select Calculator:</label>
+                <select id="calc-type-select" onchange="showCalculatorInputs()">
+                    <option value="compound_interest">Compound Interest</option>
+                    <option value="roi">Return on Investment (ROI)</option>
+                    <option value="annuity">Future Value of Annuity</option>
+                </select>
+            </div>
+
+            <div id="calculator-inputs">
+                </div>
+            
+            <div class="result" id="calculator-result">
+                Result: 
+            </div>
+        </div>
+
+        <div id="dashboard" class="tab-content">
+            <h2>Investment Dashboard</h2>
+            <p>This section would display your investments and interactive charts. For a full web implementation, this requires a backend server (e.g., Python Flask/Django) and a JavaScript charting library (e.g., Chart.js, Plotly.js).</p>
+            <p>Below is a placeholder structure.</p>
+
+            <div class="dashboard-layout">
+                <div class="dashboard-form">
+                    <h3>Manage Investments (Placeholder)</h3>
+                    <div class="form-group tooltip-container">
+                        <label for="inv-name">Name:</label>
+                        <input type="text" id="inv-name" placeholder="e.g., Tech Stock ABC">
+                        <span class="tooltiptext">Name of your investment.</span>
+                    </div>
+                    <div class="form-group tooltip-container">
+                        <label for="inv-type">Type:</label>
+                        <input type="text" id="inv-type" placeholder="e.g., Stock, Bond, Mutual Fund">
+                        <span class="tooltiptext">Type of asset (e.g., Stock, Bond).</span>
+                    </div>
+                    <div class="form-group tooltip-container">
+                        <label for="inv-initial">Initial ($):</label>
+                        <input type="number" id="inv-initial" placeholder="e.g., 1000">
+                        <span class="tooltiptext">Original cost of your investment.</span>
+                    </div>
+                    <div class="form-group tooltip-container">
+                        <label for="inv-current">Current ($):</label>
+                        <input type="number" id="inv-current" placeholder="e.g., 1250">
+                        <span class="tooltiptext">Current value of your investment.</span>
+                    </div>
+                    <div class="form-group tooltip-container">
+                        <label for="inv-date">Date Acquired (YYYY-MM-DD):</label>
+                        <input type="text" id="inv-date" placeholder="e.g., 2023-01-15">
+                        <span class="tooltiptext">Date you acquired the investment.</span>
+                    </div>
+                    <button class="btn-action">Add Investment</button>
+                    <button class="btn-action">Update Selected</button>
+                    <button class="btn-action">Delete Selected</button>
+                </div>
+
+                <div class="dashboard-list">
+                    <h3>Your Investments (Placeholder List)</h3>
+                    <ul>
+                        <li>Sample Stock (Stock) <div class="actions"><button>Edit</button><button>Delete</button></div></li>
+                        <li>Sample Bond (Bond) <div class="actions"><button>Edit</button><button>Delete</button></div></li>
+                    </ul>
+                    <button class="btn-action">Refresh List</button>
+                </div>
+
+                <div class="plot-area">
+                    <p>Interactive Plot Goes Here (Requires JavaScript charting library + backend data)</p>
+                    [Image of Bar Chart]
+                </div>
+            </div>
+        </div>
+
+        <div id="advice" class="tab-content">
+            <h2>Financial Advice Center 💡</h2>
+            <div class="advice-section">
+                <h3>Welcome to your Financial Advice Center!</h3>
+                <p>Here are some general tips to help you on your financial journey:</p>
+                <ul>
+                    <li><strong>Budgeting is Key:</strong> Understand where your money goes. Create a realistic budget and stick to it.</li>
+                    <li><strong>Emergency Fund:</strong> Aim for 3-6 months of living expenses saved in an easily accessible account.</li>
+                    <li><strong>Debt Management:</strong> Prioritize high-interest debt repayment (e.g., credit cards) using methods like the snowball or avalanche method.</li>
+                    <li><strong>Invest Early and Regularly:</strong> Compound interest is powerful! Start investing as soon as possible, even small amounts, and contribute consistently.</li>
+                    <li><strong>Diversify Your Portfolio:</strong> Don't put all your eggs in one basket. Spread your investments across different asset classes (stocks, bonds, real estate) and industries.</li>
+                    <li><strong>Set Financial Goals:</strong> Define clear short-term (e.g., new car, vacation) and long-term (e.g., buying a house, retirement) financial goals.</li>
+                    <li><strong>Review Regularly:</strong> Periodically review your budget, investments, and financial goals to ensure you're on track and make adjustments as needed.</li>
+                    <li><strong>Seek Professional Advice:</strong> For complex situations, significant wealth management, or specific tax planning, consider consulting a qualified and certified financial advisor.</li>
+                    <li><strong>Automate Savings:</strong> Set up automatic transfers from your checking to your savings and investment accounts on payday to ensure consistent saving.</li>
+                    <li><strong>Understand Risk:</strong> Every investment carries risk. Educate yourself about the risks involved in different investment vehicles and only invest what you can afford to lose.</li>
+                </ul>
+                <p>Remember, financial advice should always be tailored to your specific situation and risk tolerance.</p>
+                <div class="disclaimer">
+                    <strong>Disclaimer:</strong> This information is for educational purposes only and not financial advice. Consult a professional for personalized guidance.
+                </div>
+            </div>
+        </div>
+
+        <div id="tools" class="tab-content">
+            <h2>Financial Tools & Resources 🛠️</h2>
+            <div class="tools-section">
+                <p>This section is designed to host a variety of interactive financial tools and helpful resources to aid your planning:</p>
+                <ul>
+                    <li><strong>Retirement Planner:</strong> Estimate how much you need to save for retirement and project your future income.</li>
+                    <li><strong>Mortgage Calculator:</strong> Calculate your monthly mortgage payments, total interest paid, and amortization schedule.</li>
+                    <li><strong>Loan Calculator:</strong> Determine payments and interest for various types of loans (e.g., personal, auto).</li>
+                    <li><strong>Net Worth Tracker:</strong> A simple tool to input your assets and liabilities to track your net worth over time.</li>
+                    <li><strong>Inflation Calculator:</strong> See how inflation impacts the purchasing power of your money over time.</li>
+                    <li><strong>Tax Calculator:</strong> (Future expansion) Estimate income tax liabilities.</li>
+                    <li><strong>Glossary of Financial Terms:</strong> A quick reference for common financial jargon.</li>
+                    <li><strong>External Resources:</strong> Links to reputable financial news sites, educational platforms, and government financial literacy initiatives.</li>
+                </ul>
+                <p><strong>Current Status:</strong> The tools listed above are conceptual placeholders. Each would require dedicated implementation.</p>
+                
+                <button class="btn-action" onclick="alert('The Retirement Planner functionality is not yet implemented.')">Retirement Planner (Coming Soon)</button>
+                <button class="btn-action" onclick="alert('The Mortgage Calculator functionality is not yet implemented.')">Mortgage Calculator (Coming Soon)</button>
+                <button class="btn-action" onclick="alert('The Net Worth Tracker functionality is not yet implemented.')">Net Worth Tracker (Coming Soon)</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
